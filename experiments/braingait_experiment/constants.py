@@ -39,7 +39,7 @@ debug = False                                           # set to True for
 
 # Screen settings for subject display
 screen = {}
-screen['size'] = [1024, 768]        # screen resolution
-screen['fullscr'] = False           # full screen, if false it's in a
+screen['size'] = [1024, 768]   #[1024, 768]scanner screen  , [1920,1080] lab PC screen    # screen resolution
+screen['fullscr'] = True           # full screen, if false it's in a
 # separate window
 screen['number'] = 1                # 0 = main display, 1 = secondary display
