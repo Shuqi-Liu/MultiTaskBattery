@@ -57,6 +57,7 @@ def main(subj_id):
     curTaskName = curTaskName.replace("practice_run__","")  # now will be oddball.tsv
     curTaskName = curTaskName.replace(".tsv", "")  # now will be oddball
     nextTaskIdx = tasks.index(curTaskName)
+    curFileDigits = 5 #start with 5
 
     while nextTaskIdx < len(tasks):
         my_Exp.run_filename = f'practice_run_{curFileDigits:02d}' \
@@ -92,8 +93,6 @@ def main(subj_id):
             # restart at run05 randomization order for the next task.
             # my_Exp.run_filename = f'practice_run_05' \
             #                       f'_{tasks[nextTaskIdx]}.tsv'
-            #always starts with 5
-            curFileDigits = 5
         elif 'left' in keys:
             # Otherwise stay at the same task and increment run number
             my_Exp.run_number = my_Exp.run_number + 1
