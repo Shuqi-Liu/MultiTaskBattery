@@ -59,6 +59,8 @@ def main(subj_id):
     nextTaskIdx = tasks.index(curTaskName)
 
     while nextTaskIdx < len(tasks):
+        my_Exp.run_filename = f'practice_run_{curFileDigits:02d}' \
+                              f'_{tasks[nextTaskIdx]}.tsv'
         my_Exp.init_run()
         my_Exp.run(isPractice=True)
 
@@ -88,8 +90,10 @@ def main(subj_id):
             nextTaskIdx += 1  # increment to laod next task now
             my_Exp.run_number = 1  # reset to 1
             # restart at run05 randomization order for the next task.
-            my_Exp.run_filename = f'practice_run_05' \
-                                  f'_{tasks[nextTaskIdx]}.tsv'
+            # my_Exp.run_filename = f'practice_run_05' \
+            #                       f'_{tasks[nextTaskIdx]}.tsv'
+            #always starts with 5
+            curFileDigits = 5
         elif 'left' in keys:
             # Otherwise stay at the same task and increment run number
             my_Exp.run_number = my_Exp.run_number + 1
@@ -101,8 +105,7 @@ def main(subj_id):
             curFileDigits = int("".join(curFileDigits))
             curFileDigits = (curFileDigits+1) % 5 + 5 #bound it to
             # between[5,9] and start from 6 (1st repeat will be run_06)
-            my_Exp.run_filename = f'practice_run_{curFileDigits:02d}' \
-                                  f'_{tasks[nextTaskIdx]}.tsv'
+
             #do the same task but go to next digits
 
         # else: #full run thorugh, always auto increment to next one
