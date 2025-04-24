@@ -3,6 +3,7 @@
 
 import constants_practice as const
 from psychopy import sound
+from MultiTaskBattery.ttl_clock import TTLClock
 
 def main(subj_id):
     """ Main experiment function.
@@ -23,6 +24,9 @@ def main(subj_id):
                          'narrative_05-trimmed.wav'
     practice_sound = sound.Sound(str(practice_soundpath))
     practice_sound.play()
+    ttl_clock = TTLClock()
+    ttl_clock.wait_until(ttl_clock.get_time() + 12) #need this wait for the
+    # sound file to play properly. otherwise will return too quick
     return
 
 
