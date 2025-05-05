@@ -50,3 +50,5 @@ screen['size'] = [1024, 768]    #[1024, 768]scanner screen  , [1920,1080] lab PC
 screen['fullscr'] = True           # full screen, if false it's in a separate
 # window
 screen['number'] = 1                # 0 = main display, 1 = secondary display
+
+default_wait_for_ttl = False #default true, always wait for it

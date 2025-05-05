@@ -67,7 +67,12 @@ class Experiment:
             inputDlg.addField('Enter Subject id (str):',initial = self.subj_id)      # run number (int)
             inputDlg.addField('Enter Run Number (int):',initial = self.run_number+1)      # run number (int)
             inputDlg.addField('Run File name (str):',initial = self.const.default_run_filename.format(f'{self.run_number + 1:02d}'))      # run number (int)
-            inputDlg.addField('Wait for TTL pulse?', initial = True) # a checkbox for ttl pulse (set it true for scanning)
+            if hasattr(self.const,'default_wait_for_ttl'):
+                inputDlg.addField('Wait for TTL pulse?',
+                                  initial=self.const.default_wait_for_ttl)  # a checkbox for ttl
+                # pulse (set it true for scanning)
+            else:
+                inputDlg.addField('Wait for TTL pulse?', initial = True) # a checkbox for ttl pulse (set it true for scanning)
 
             inputDlg.show()
 
