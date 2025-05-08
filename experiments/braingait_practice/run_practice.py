@@ -23,10 +23,10 @@ def main(subj_id):
     # /Projects/BrainGaitProject/MultiTaskBattery')
 
     #practice them in order
-    tasks = ['movie', 'action_observation','auditory_narrative', 'verb_generation', 'spatial_navigation',
-             'flexion_extension','contract_relax_glutes','finger_sequence',
-             'sentence_reading', 'visual_search', 'semantic_prediction',
-             'n_back','oddball','theory_of_mind']
+    tasks = ['movie', 'action_observation','auditory_narrative','spatial_navigation',
+             'flexion_extension','contract_relax_glutes', 'sentence_reading',
+             'verb_generation', 'finger_sequence', 'visual_search',
+             'semantic_prediction','n_back','oddball','theory_of_mind']
 
     my_Exp = exp_block.Experiment(const, subj_id=subj_id)
     # #give a GUI to ask if want to do 1 task at a time or do a full run through?
