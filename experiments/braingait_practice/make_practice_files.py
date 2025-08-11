@@ -11,7 +11,7 @@ import constants_practice as const
 tasks = ['movie','theory_of_mind','action_observation','finger_sequence',
          'visual_search','spatial_navigation','semantic_prediction',
          'verb_generation','n_back','contract_relax_glutes',
-         'flexion_extension','auditory_narrative','sentence_reading','oddball']
+         'flexion_extension','auditory_narrative','sentence_reading','oddball','auditory_narrative_subtitle']
 #the task won't be generated the same order as the input order here and
 # that's on purpose bc in task_file.make_run_file(), it shuffles the row,
 # so that 2 runs are not in the same order either.
@@ -65,7 +65,8 @@ for r in range(start_run_num, start_run_num+num_runs): #python is 0 indexing, ra
 
     # Generate a target file for each run
     for task, tfile in zip(tasks, tfiles):
-        if task in ['movie','spatial_navigation','contract_relax_glutes','flexion_extension','auditory_narrative']:
+        if task in ['movie','spatial_navigation','contract_relax_glutes',
+                    'flexion_extension','auditory_narrative','auditory_narrative_subtitle']:
             #these are minimum 30s long bc each task go by trials and these
             # have trials length as 30, any task_dur shorter will generate no
             # trial and empty.tsv file which will cause an error
@@ -91,7 +92,7 @@ for r in range(start_run_num, start_run_num+num_runs): #python is 0 indexing, ra
             args.update({'run_number': r})
 
         if myTask.name in ['movie','spatial_navigation','contract_relax_glutes',
-                     'flexion_extension','auditory_narrative']:
+                     'flexion_extension','auditory_narrative','auditory_narrative_subtitle']:
             args.update({'task_dur': 30}) #movie and spatial have to be 30s
         else:
             args.update({'task_dur': 15})  # for all practice tasks make it 15s long
