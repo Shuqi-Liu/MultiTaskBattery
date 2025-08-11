@@ -1,6 +1,6 @@
 task_name	task_code	task_file	instruction_dur	start_time	end_time
 oddball	odbal	oddball_02.tsv	5	0	35
-auditory_narrative	audnarr	auditory_narrative_02.tsv	5	35	70
+auditory_narrative_subtitle	audSub	auditory_narrative_subtitle_02.tsv	5	35	70
 contract_relax_glutes	contract_relax_glu	contract_relax_glutes_02.tsv	5	70	105
 finger_sequence	fingseq	finger_sequence_02.tsv	5	105	140
 n_back	nbko	n_back_02.tsv	5	140	175
