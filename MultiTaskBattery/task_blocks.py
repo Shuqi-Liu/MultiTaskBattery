@@ -385,6 +385,60 @@ class AuditoryNarrative(Task):
 
         return trial
 
+class AuditorySubtitle(Task):
+    def __init__(self, info, screen, ttl_clock, const, subj_id):
+        super().__init__(info, screen, ttl_clock, const, subj_id)
+
+    def display_instructions(self):
+        self.instruction_text = f'{self.descriptive_name} Task\n\nListen to ' \
+                                f'the narrative attentively '\
+                                f'and follow along the subtitles.'
+        instr_visual = visual.TextStim(self.window, text=self.instruction_text,
+                                       color=[-1, -1, -1])
+        instr_visual.draw()
+        self.window.flip()
+
+    def run_trial(self, trial):
+        """ Run a single trial of the AuditoryNarrative task and display the
+        subtitles. """
+
+        # Load and play audio stimulus for the current trial
+        audio_path = self.const.stim_dir / 'auditory_narrative' / trial['stim']
+        audio_stim = sound.Sound(str(audio_path))
+
+        # # Display story (whole story at once)
+        # story_stim = visual.TextStim(self.window, text=trial['subtitle'],
+        #                              alignHoriz='center', wrapWidth=20,
+        #                              pos=(0.0, 0.0), color=(-1, -1, -1),
+        #                              units='deg', height=1.25)
+        # story_stim.draw()
+        # self.window.flip()
+
+        #Play the audio now.
+        audio_stim.play()
+
+        # Try to display in 3 trunks, and update every 10s to make it more
+        # engaging and more like subtitles
+        stim_chunks = trial['subtitle'].split("\\n")
+
+        for s in stim_chunks:
+            # Display story (whole story at once)
+            story_stim = visual.TextStim(self.window, text=s,
+                                         alignHoriz='center', wrapWidth=20,
+                                         pos=(0.0, 0.0), color=(-1, -1, -1),
+                                         units='deg', height=1.25)
+            story_stim.draw()
+            self.window.flip()
+
+            # Wait for the duration of the stimulus
+            start_time = self.ttl_clock.get_time()
+            self.ttl_clock.wait_until(start_time + trial['stim_dur'])
+
+        # display trial feedback
+        self.display_trial_feedback(give_feedback= trial['display_trial_feedback'], correct_response = None)
+
+        return trial
+
 class SpatialNavigation(Task):
     def __init__(self, info, screen, ttl_clock, const, subj_id):
         super().__init__(info, screen, ttl_clock, const, subj_id)

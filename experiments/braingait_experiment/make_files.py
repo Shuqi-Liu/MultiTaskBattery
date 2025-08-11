@@ -8,15 +8,15 @@ import constants as const
 tasks = ['movie','theory_of_mind','action_observation','finger_sequence',
          'visual_search','spatial_navigation','semantic_prediction',
          'verb_generation','n_back','contract_relax_glutes',
-         'flexion_extension','auditory_narrative','sentence_reading','oddball']
+         'flexion_extension','auditory_narrative_subtitle','sentence_reading','oddball']
 #the task won't be generated the same order as the input order here and
 # that's on purpose bc in task_file.make_run_file(), it shuffles the row,
 # so that 2 runs are not in the same order either.
 # #things that we would like to have but doesn't seem to be there: arithmatic,
 # n_back_verbal
 
-num_runs = 4  # Number of imaging runs, in reality only need 2, but generate
-# 4 just in case we need extras
+num_runs = 2  # Number of imaging runs, only need 2 runs. If mistakes happen
+# during a run, can just repeat
 
 # Ensure task and run directories exist
 ut.dircheck(const.run_dir)
@@ -68,6 +68,8 @@ for r in range(1, num_runs+1): #python is 0 indexing
 
         if myTask.name == 'movie': #specify a condition, do romance movie only
             args.update({'condition': 'romance'})
+
+        #can change the stimulus duration here for the subtitle
 
         # Make task file
         myTask.make_task_file(file_name=tfile, **args) #this meaks the task

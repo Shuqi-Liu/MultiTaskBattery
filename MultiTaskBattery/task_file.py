@@ -360,6 +360,54 @@ class SpatialNavigation(TaskFile):
 
         return trial_info
 
+
+class AuditorySubtitle(TaskFile):
+    def __init__(self, const):
+        super().__init__(const)
+        self.name = 'auditory_narrative_subtitle'
+
+    def make_task_file(self,
+                       run_number=None,
+                       task_dur=30,
+                       trial_dur=30,
+                       iti_dur=0,
+                       file_name=None):
+
+        # count number of trials
+        n_trials = int(np.floor(task_dur / (trial_dur + iti_dur)))
+        trial_info = []
+        t = 0
+
+        stim = pd.read_csv(
+            self.stim_dir / 'auditory_narrative_subtitle' / 'auditory_narrative_subtitle.csv')
+
+        start_row = (run_number - 1)
+        stim = stim.iloc[start_row:start_row+1].reset_index(drop=True) #this will only get the start
+        # row but at least will keep the header, if did stim.iloc will get
+        # jsut 1 row with no header
+
+        for n in range(n_trials):
+            trial = {}
+            trial['trial_num'] = n
+            trial['trial_dur'] = trial_dur
+            trial['iti_dur'] = iti_dur
+            trial['subtitle'] = stim['subtitle'][n] #read from the csv file
+            trial['stim_dur'] = stim['stim_dur'][n] #read from the csv file
+            trial['stim'] = f'narrative_{run_number:02d}.wav'
+            trial['display_trial_feedback'] = False
+            trial['start_time'] = t
+            trial['end_time'] = t + trial_dur + iti_dur
+            trial_info.append(trial)
+
+            # Update for next trial:
+            t = trial['end_time']
+
+        trial_info = pd.DataFrame(trial_info)
+        if file_name is not None:
+            trial_info.to_csv(self.task_dir / self.name / file_name, sep='\t',
+                              index=False)
+        return trial_info
+
 class TheoryOfMind(TaskFile):
     def __init__(self, const):
         super().__init__(const)

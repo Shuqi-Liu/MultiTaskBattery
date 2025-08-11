@@ -204,9 +204,9 @@ class Experiment:
         for task in self.task_obj_list:
             task.save_data(self.subj_id, self.run_number)
 
-        # show the scoreboard
-        self.display_run_feedback(run_data)
-
+        # show the scoreboard, disable this since it's stressful for the
+        # participants to see the score
+        # self.display_run_feedback(run_data)
 
     def display_run_feedback(self, run_data):
         """ Displays a score board for the tasks in the task_list
